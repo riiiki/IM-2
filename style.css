@@ -18,8 +18,10 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
 
+  background: url('images/sort.jpg') no-repeat center center;
+  background-size: cover;
+}
 .nav .logo {
   font-weight: bold;
   color: #0b355d;
@@ -92,10 +94,15 @@ body {
 }
 
 .welcome {
-  flex: 1 1 100%;
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: left;
+  width: 300px;
+  background-color: rgba(230, 238, 255, 0.9);
+  padding: 2rem;
+  border-radius: 12px;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
 }
 
 .welcome h2 span {
@@ -135,7 +142,7 @@ body {
 
 .booking {
   width: 300px;
-  background-color: #e6eeff;
+  background-color: rgba(230, 238, 255, 0.9);
   padding: 2rem;
   border-radius: 12px;
   display: flex;
