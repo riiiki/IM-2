@@ -309,3 +309,62 @@ img {
   height: auto;
   display: block;
 }
+/*----------NAV Hover Effect-------------*/
+.nav nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 0.3rem 0.5rem; 
+  border-radius: 6px;     
+  transition: color 0.5s ease, background-color 0.5s ease;
+}
+.nav nav a:hover {
+  color: white;
+  background-color: #003366;
+}
+/*----------NAV Hover Effect-------------*/
+
+/*----------Explore Link Footer-------------*/
+footer .social-links {
+  margin-top: 1rem;
+}
+
+footer .social-links h4 {
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.icon-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.icon-buttons .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  color: #003366;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  border: 2px solid #003366;
+}
+
+.icon-buttons .icon:hover {
+  color: white;
+}
+
+.icon.facebook:hover { background-color: #3b5998; border-color: #3b5998; }
+.icon.twitter:hover { background-color: #1da1f2; border-color: #1da1f2; }
+.icon.pinterest:hover { background-color: #bd081c; border-color: #bd081c; }
+.icon.instagram:hover { background-color: #e4405f; border-color: #e4405f; }
+.icon.youtube:hover { background-color: #ff0000; border-color: #ff0000; }
+
+/*----------Explore Link Footer-------------*/
