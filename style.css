@@ -13,7 +13,7 @@ body {
   display: flex;
   flex-direction: column;
 }
-
+/*updated bg image*/
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -93,6 +93,7 @@ body {
   flex: 1;
 }
 
+/*updated welcome text with border*/
 .welcome {
   width: 300px;
   background-color: rgba(230, 238, 255, 0.9);
@@ -140,6 +141,7 @@ body {
   border-radius: 8px;
 }
 
+/*updated booking margin with 90% opacity*/
 .booking {
   width: 300px;
   background-color: rgba(230, 238, 255, 0.9);
