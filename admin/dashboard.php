@@ -1,17 +1,3 @@
-// CREATE DATABASE skyview;
-
-// USE skyview;
-
-// CREATE TABLE bookings (
-//   id INT AUTO_INCREMENT PRIMARY KEY,
-//   checkin DATE NOT NULL,
-//   checkout DATE NOT NULL,
-//   room_details VARCHAR(255) NOT NULL,
-//   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-// );
-// mao ni sud sa db e tweak lang nya
-
-
 <?php
 session_start();
 
