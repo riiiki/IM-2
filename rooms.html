@@ -41,10 +41,10 @@
         </div>
         <div class="booking">
           <h3>CHECK AVAILABILITY</h3>
-          <form>
-            <input type="date" />
-            <input type="date" />
-            <select>
+          <form action="book.php" method="POST">
+            <input type="date" name="checkin" required/>
+            <input type="date" name="checkout required"/>
+            <select name="room" required>
               <option>1 Room, 2 Adult, 0 Child</option>
               <option>1 Room, 2 Adult, 1 Child</option>
               <option>2 Room, 4 Adult, 2 Child</option>
@@ -54,8 +54,6 @@
         </div>
       </section>
      </main>
-
-    <!-- ADDED HERE -->
     <footer>
       <p>© 2025 Skyview Resort. All rights reserved.</p>
       <p>📞 +63 960 863 2989</p>
