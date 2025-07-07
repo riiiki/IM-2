@@ -41,7 +41,7 @@
         </div>
         <div class="booking">
           <h3>CHECK AVAILABILITY</h3>
-          <form action="book.php" method="POST">
+          <form action="admin/bookings.php" method="POST">
             <input type="date" name="checkin" required/>
             <input type="date" name="checkout required"/>
             <select name="room" required>
