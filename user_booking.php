@@ -65,6 +65,25 @@ $result = $stmt->get_result();
     background-position: center;
     font-family: Arial, sans-serif;
   }
+      /*If user has no bookings footer stays at the bottom*/
+      html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
   
 </style>
 </head>
