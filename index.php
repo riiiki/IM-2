@@ -53,7 +53,7 @@
           <a href="#" onclick="openModal('loginModal')">Login</a>
         </nav>
       </div>
-
+      <img src="images/sort.jpg" alt="Resort view" class="wrapper-bg" />
       <div id="registerModal" class="modal">
         <div class="modal-content">
           <span class="close" onclick="closeModal('registerModal')">&times;</span>
@@ -74,6 +74,9 @@
 
             <label for="register-password">Password:</label>
             <input type="password" id="register-password" name="password" required><br><br>
+
+            <label for="register-date">Date Registered:</label>
+            <input type="date" id="register-date" name="date_registered" required><br><br>
 
             <input type="submit" name="submit" value="Register">
 
