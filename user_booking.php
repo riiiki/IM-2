@@ -74,7 +74,7 @@ $result = $stmt->get_result();
         <h1 class="logo"><a href="index.php"><span>SKYVIEW</span></a></h1>
         <nav>
           <a href="rooms.php">Rooms</a>
-          <a href="user_booking.php">Bookings</a>
+          <a href="user_bookings.php">Bookings</a>
           <a href="activities.php">Activities</a>
           <a href="about.php">About</a>
           <a href="logout.php">Logout</a>
