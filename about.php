@@ -7,7 +7,7 @@ include("user/auth.php");
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" type="image/jpg" href="images/skyview.jpg">
+  <link rel="icon" type="image/png" href="images/mountain.png">
   <title>About Us | Skyview Resort</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -17,8 +17,7 @@ include("user/auth.php");
       <div class="nav">
         <h1 class="logo"><a href="index2.php">SKYVIEW</a></h1>
         <nav>
-          <!-- remove explore -->
-          <!-- <a href="explore.html">Explore</a> -->
+          
           <a href="rooms.php">Rooms</a>
           <a href="user_booking.php">Bookings</a>
           <a href="activities.php">Activities</a>
@@ -60,7 +59,7 @@ include("user/auth.php");
         </div>
 
         <div class="about-image">
-          <!-- put image -->
+          
           <img src="images/about_view.jpg" alt="View from the resort" />
         </div>
       </section>
