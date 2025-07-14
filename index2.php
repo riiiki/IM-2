@@ -11,6 +11,7 @@ include("user/auth.php");
 </head>
 <body>
   <div class="wrapper">
+    <img src="images/sort.jpg" alt="Resort view" class="wrapper-bg" />
     <header>
       <div class="nav">
         <h1 class="logo"><a href="#">SKYVIEW</a></h1>
