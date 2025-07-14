@@ -75,9 +75,6 @@
             <label for="register-password">Password:</label>
             <input type="password" id="register-password" name="password" required><br><br>
 
-            <label for="register-date">Date Registered:</label>
-            <input type="date" id="register-date" name="date_registered" required><br><br>
-
             <input type="submit" name="submit" value="Register">
 
             <div class="social-login">
