@@ -21,7 +21,7 @@ include("user/auth.php");
           <a href="rooms.php">Rooms</a>
           <a href="user_booking.php">Bookings</a>
           <a href="activities.php">Activities</a>
-          <a href="about.php">About</a>
+          <a href="about.php" class="active">About</a>
           <a href="user/logout.php">Logout</a>
         </nav>
       </div>
