@@ -43,7 +43,8 @@
               <input type="tel" id="phone" name="phone" required>
             </div>
             <!-- Open modal using URL hash -->
-            <a id="open-btn" class="btn-submit" onclick="openBtn()">Proceed to Payment</a>
+           <button id="open-btn" class="btn-submit" onclick="handleOpenBtn(event)" disabled> Proceed to Payment</button>
+
           </form>
         </div>
       </div>
@@ -93,15 +94,27 @@
 </body>
 
   <script>
+  const emailInput = document.getElementById('email');
+  const phoneInput = document.getElementById('phone');
+  const proceedButton = document.getElementById('open-btn'); 
 
-    function openBtn(){
-      document.getElementById('pay-modal').style.display = "flex";
-      e.preventDefault();
-    }
-    function closeBtn(){
-      document.getElementById('pay-modal').style.display = "none";
-    }
+  function validateInputs() {
+    const emailFilled = emailInput.value.trim() !== '';
+    const phoneFilled = phoneInput.value.trim() !== '';
+    proceedButton.disabled = !(emailFilled && phoneFilled);
+  }
 
-  </script>
+  emailInput.addEventListener('input', validateInputs);
+  phoneInput.addEventListener('input', validateInputs);
+
+  function handleOpenBtn(event) {
+    event.preventDefault(); 
+    document.getElementById('pay-modal').style.display = "flex";
+  }
+
+  function closeBtn() {
+    document.getElementById('pay-modal').style.display = "none";
+  }
+</script>
 
 </html>
