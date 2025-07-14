@@ -159,7 +159,7 @@ include ("user/auth.php");
       <div class="nav">
         <h1 class="logo"><a href="index2.php">SKYVIEW</a></h1>
         <nav>
-          <a href="rooms.php">Rooms</a>
+          <a href="rooms.php" class="active">Rooms</a>
           <a href="user_booking.php">Bookings</a>
           <a href="activities.php">Activities</a>
           <a href="about.php">About</a>
