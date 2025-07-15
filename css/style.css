@@ -1,0 +1,574 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  position: relative;       /* establish positioning context */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.wrapper-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* cover without distortion */
+  z-index: -1;              /* behind all other content */
+}
+
+.nav .logo {
+  font-weight: bold;
+  color: #0b355d;
+  font-size: 1.5rem;
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 1rem 3rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav nav a {
+  margin-left: 2rem;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.nav a.active {
+  color: #003366;
+  font-weight: bold;
+  border-bottom: 2px solid #003366;
+}
+
+.hero {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  max-width: 2000px;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-text {
+  position: absolute;
+  text-align: center;
+  font-size: 3.6rem;
+  color: #ffd700;
+  font-weight: 700;
+  text-shadow: 2px 2px #000;
+  line-height: 1.2;
+  font-family: initial;
+}
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 2rem;
+  gap: 2rem;
+  flex: 1;
+}
+
+.welcome {
+  width: 300px;
+  background-color: rgba(230, 238, 255, 0.9);
+  padding: 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.welcome h2 span {
+  color: #0f5091;
+}
+
+.features {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 1.05rem;
+}
+
+.features p {
+  margin-top: 0.5rem;
+}
+
+.middle-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem 2rem;
+  flex-wrap: wrap;
+}
+
+.middle-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-width: 400px;
+  max-height: 350px;
+  border-radius: 8px;
+}
+
+.booking {
+  width: 300px;
+  background-color: rgba(230, 238, 255, 0.9);
+  padding: 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.booking h3 {
+  margin-bottom: 1rem;
+  color: #003366;
+  font-size: 1.3rem;
+}
+
+.booking form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.booking input,
+.booking select,
+.booking button {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.booking button {
+  background-color: #003366;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.booking button:hover {
+  background-color: #002a55;
+}
+
+/* Payment landing page styles */
+.payment-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 2rem auto;
+  gap: 2rem;
+}
+
+.payment-form {
+  flex: 1 1 60%;
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.payment-form h2 {
+  margin-bottom: 1rem;
+}
+
+.payment-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.payment-form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+.payment-form input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.payment-form button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.qr-container {
+  color: #0553c7;
+  flex: 1 1 35%;
+  text-align: left;
+}
+
+.qr-container img {
+  max-width: 100%;
+  height: 300;
+  border-radius: 40px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .payment-container { flex-direction: column; }
+}
+
+/* === ADMIN SIDE NGA TAB === */
+.side-tab {
+  position: fixed;
+  top: 40%;
+  right: 40px;
+  width: 150px;    
+  transform: rotate(-90deg);
+  transform-origin: right top;
+  background-color: #2d72d9;
+  color: #fff;
+  padding: 0.75rem 1.2rem;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 9999;
+  cursor: pointer;
+  transition: right 0.3s ease-out;
+}
+
+.side-tab:hover {
+  right: 50px;
+  background-color: #1e4ea1;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-overlay:target {
+  display: flex;
+}
+
+.modal-box {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+/* close “×” link */
+.close-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #333;
+}
+
+/* minor form styling */
+.modal-box form {
+  margin-top: 1rem;
+}
+.modal-box input {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.modal-box button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #2d72d9;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* SULOD SA ADMIN SIDE NA TAB */
+/* Container for the three option buttons */
+.option-buttons {
+  display: flex;
+  justify-content: space-between; /* even space between buttons */
+  gap: 1rem;                       /* consistent gutter */
+  margin-top: 1.5rem;
+}
+
+/* Make each button the same width and center its text */
+.option-buttons .btn {
+  flex: 1;                         /* equal width */
+  text-align: center;
+  padding: 0.75rem 0;              /* vertical padding, horizontal auto‑sized */
+  background-color: #2d72d9;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+/* Hover state */
+.option-buttons .btn:hover {
+  background-color: #1e4ea1;
+}
+
+
+    
+.about-page {
+  padding: 2rem;
+  background-color: #f8faff;
+  flex: 1;
+}
+
+.about-hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.about-hero h2 {
+  font-size: 2.2rem;
+  color: #003366;
+  margin-bottom: 1rem;
+}
+
+.about-hero p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-text {
+  flex: 1 1 400px;
+  max-width: 600px;
+}
+
+.about-text h3 {
+  color: #0b355d;
+  margin-top: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.about-text ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about-text li {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.about-image {
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .hero-text {
+    font-size: 2.2rem;
+    top: 15%;
+    left: 8%;
+  }
+
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav a {
+    margin: 0.5rem 0;
+  }
+
+  .middle-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .middle-image img {
+    max-width: 100%;
+    max-height: 250px;
+  }
+
+  .booking {
+    width: 90%;
+  }
+
+  .about-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-text, .about-image {
+    max-width: 90%;
+    text-align: center;
+  }
+
+  .about-text ul {
+    text-align: left;
+    padding-left: 1rem;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/*----------NAV Hover Effect-------------*/
+.nav nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 0.3rem 0.5rem; 
+  border-radius: 6px;     
+  transition: color 0.5s ease, background-color 0.5s ease;
+}
+.nav nav a:hover {
+  color: white;
+  background-color: #003366;
+}
+/*----------NAV Hover Effect-------------*/
+
+/*----------Explore Link Footer-------------*/
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #003366;
+  color: white;
+}
+
+footer p {
+  margin: 0.3rem 0;
+}
+.icon-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.icon-buttons .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  color: #003366;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  border: 2px solid #003366;
+}
+
+.icon-buttons .icon:hover {
+  color: white;
+}
+
+.icon.facebook:hover { background-color: #3b5998; border-color: #3b5998; }
+.icon.twitter:hover { background-color: #1da1f2; border-color: #1da1f2; }
+.icon.pinterest:hover { background-color: #bd081c; border-color: #bd081c; }
+.icon.instagram:hover { background-color: #e4405f; border-color: #e4405f; }
+.icon.youtube:hover { background-color: #ff0000; border-color: #ff0000; }
+
+/*----------Explore Link Footer-------------*/
+
+/*----------INDEX Hover from NAV-------------*/
+.logo a {
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.4s ease, background 0.4s ease, text-shadow 0.4s ease;
+  display: inline-block;
+}
+
+.logo a:hover {
+  transform: scale(1.25);
+  background: linear-gradient(
+    to top right,
+    #0a3b6b 0%,     
+    #093c6f 30%,
+    #6A0DAD 60%,    
+    #FF6B00 85%     
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 10px rgba(0, 34, 68, 0.4);
+}
+/*----------INDEX Hover from NAV-------------*/
