@@ -1,108 +1,120 @@
-<?php
-  session_start();
-?>
+<?php include("user/auth.php"); ?>
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" type="image/jpg" href="images/skyview.jpg">
-  <title>Skyview Resort</title>
+  <link rel="stylesheet" href="css/payment.css" />
   <link rel="stylesheet" href="css/style.css" />
-</head>
+  <title>Payment | Skyview Resort</title>
 <body>
-  <style>
-    .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-    }
+  <!-- Radio toggles for QR selection -->
+  <input type="radio" name="qr" id="qr-none" hidden checked>
+  <input type="radio" name="qr" id="qr-gcash" hidden>
+  <input type="radio" name="qr" id="qr-paymaya" hidden>
 
-    .modal-content {
-        background-color: #fefefe;
-        margin: 10% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 450px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        animation: slide-in 0.3s ease-out;
-    }
-  </style>
-  <div class = "wrapper">
+  <div class="wrapper">
     <header>
+      <img src="images/sort.jpg" alt="Resort view" class="wrapper-bg" />
       <div class="nav">
-        <h1 class="logo"><a href="index.php"><span>SKYVIEW</span></a></h1>
+        <h1 class="logo"><a href="index2.php">SKYVIEW</a></h1>
         <nav>
-          <!-- remove explore -->
-          <!-- <a href="explore.html">Explore</a> -->
           <a href="rooms.php">Rooms</a>
           <a href="user_booking.php">Bookings</a>
           <a href="activities.php">Activities</a>
           <a href="about.php">About</a>
-          <a href="admin/register.php">Register</a>
-          <a href="admin/login.php">Login</a>
+          <a href="user/logout.php">Logout</a>
         </nav>
-      </div>
-      <div class="hero">
-        <h2 class="hero-text">CHASE<br>THE<br>SUNSETS</h2>
       </div>
     </header>
 
-    <main class="main-container">
-      <section class="welcome">
-        <h2>Welcome to <span>Skyview</span></h2>
-        <p>
-          Nestled in the heart of the mountains, where every evening ends in golden
-          light and every morning begins with peace. Discover sunsets that stay
-          with you long after the day ends.
-        </p>
-        <div class="features">
-          <p>High Speed WIFI</p>
-          <p>Complimentary Breakfast</p>
-          <p>Premier Sunsets</p>
-        </div>
-      </section>
+    <main class="main-center">
+      <div class="payment-container">
+        <div class="payment-form">
+          <h2>Complete Your Booking</h2>
+          <form>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Contact Number</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+            <!-- Open modal using URL hash -->
+           <button id="open-btn" class="btn-submit" onclick="handleOpenBtn(event)" disabled> Proceed to Payment</button>
 
-        <div class="booking">
-          <h3>BOOK NOW</h3>
-          <form id="booking-form" action="user/booking.php" method="POST">
-            <input type="date" name="checkin" placeholder="Check-in" required />
-            <input type="date" name="checkout" placeholder="Check-out" required />
-            <select name="room">
-              <option>Standard Room</option>
-              <option>Deluxe Rooms</option>
-            </select>
-            <button type="submit">Check availability</button>
           </form>
         </div>
-        </section>
+      </div>
     </main>
-    <script src="node.js"></script>
+
     <footer>
       <p>© 2025 Skyview Resort. All rights reserved.</p>
       <p>📞 +63 960 863 2989</p>
-      <div class="social-links">
-        <h4>Stay Connected</h4>
-        <div class="icon-buttons">
-          <a href="https://www.facebook.com/profile.php?id=100063647214137" target="_blank" class="icon facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://twitter.com" target="_blank" class="icon twitter"><i class="fab fa-twitter"></i></a>
-          <a href="https://ph.pinterest.com/pin/30328997485654246/" target="_blank" class="icon pinterest"><i class="fab fa-pinterest-p"></i></a>
-          <a href="https://www.instagram.com/islandskyview.resort/?hl=en" target="_blank" class="icon instagram"><i class="fab fa-instagram"></i></a>
-          <a href="http://youtube.com/@MrBeast" target="_blank" class="icon youtube"><i class="fab fa-youtube"></i></a>
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="pay-modal">
+    <div id="modalBox"class="modal-box">
+      <button id="close-btn" class="close-button" onclick="closeBtn()">&times;</button>
+
+      <!-- QR OPTIONS -->
+      <div class="qr-options">
+        <h3>How would you like to pay?</h3>
+        <div class="option-buttons">
+          <label for="qr-gcash" class="btn">
+            <img src="images/gcash.png" alt="Gcash">
+           <span href = "#qr-container qr-gcash">Gcash</span> 
+          </label>
+          <label for="qr-paymaya" class="btn">
+            <img src="images/maya.png" alt="PayMaya">
+    
+           <span href = "#qr-container qr-paymaya">PayMaya</span> 
+          </label>
         </div>
       </div>
-    </footer>
-
+      <!-- QR CONTAINERS -->
+      <div id="gcashCont" class="qr-container qr-gcash">
+        <h3>Scan to pay with GCash</h3>
+        <img src="images/gcash_qr.png" alt="Gcash QR Code">
+        <label for="qr-none" class="btn-submit">Back</label>
+      </div>
+      <div id="paymayaCont" class="qr-container qr-paymaya">
+        <h3>Scan to pay with PayMaya</h3>
+        <img src="images/maya_qr.png" alt="PayMaya QR Code">
+        <label for="qr-none" class="btn-submit">Back</label>
+      </div>
+    </div>
   </div>
+
+
 </body>
+
+  <script>
+  const emailInput = document.getElementById('email');
+  const phoneInput = document.getElementById('phone');
+  const proceedButton = document.getElementById('open-btn'); 
+
+  function validateInputs() {
+    const emailFilled = emailInput.value.trim() !== '';
+    const phoneFilled = phoneInput.value.trim() !== '';
+    proceedButton.disabled = !(emailFilled && phoneFilled);
+  }
+
+  emailInput.addEventListener('input', validateInputs);
+  phoneInput.addEventListener('input', validateInputs);
+
+  function handleOpenBtn(event) {
+    event.preventDefault(); 
+    document.getElementById('pay-modal').style.display = "flex";
+  }
+
+  function closeBtn() {
+    document.getElementById('pay-modal').style.display = "none";
+  }
+</script>
+
 </html>
