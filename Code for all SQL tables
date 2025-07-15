@@ -1,0 +1,36 @@
+CREATE TABLE Customer (
+    CustomerID INT PRIMARY KEY AUTO_INCREMENT,
+    FullName VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL,
+    PhoneNumber VARCHAR(20),
+    PasswordHash VARCHAR(255) NOT NULL,
+    DateRegistered TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE bookings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  checkin DATE NOT NULL,
+  checkout DATE NOT NULL,
+  room_details VARCHAR(255) NOT NULL,
+  room_status VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES customer(CustomerID)
+)
+
+CREATE TABLE admins (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(100) UNIQUE,
+  password VARCHAR(255)
+);
+
+CREATE TABLE Payment (
+    PaymentID INT PRIMARY KEY AUTO_INCREMENT,
+    BookingID INT NOT NULL,
+    PaymentDate DATE NOT NULL,
+    Amount DECIMAL(10, 2) NOT NULL,
+    PaymentMethod VARCHAR(50) NOT NULL,
+    Status VARCHAR(50) NOT NULL,
+    FOREIGN KEY (BookingID) REFERENCES bookings(id)
+);
