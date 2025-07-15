@@ -1,0 +1,149 @@
+.activities-page {
+  padding: 2rem;
+  background-color: #f8faff;
+  flex: 1;
+}
+
+.activities-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.activities-header h2 {
+  font-size: 2.2rem;
+  color: #003366;
+}
+
+.slider input { display: none; }
+
+/* Slides container */
+.slides {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+/* Each slide stacked */
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Reveal the checked slide */
+#slide1:checked ~ .slides .s1,
+#slide2:checked ~ .slides .s2,
+#slide3:checked ~ .slides .s3,
+#slide4:checked ~ .slides .s4 {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Slide images */
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Caption overlay */
+.caption {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Base styles for nav buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #003366;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s;
+  text-decoration: none;
+  z-index: 2;
+}
+.nav-btn:hover { background-color: #002a55; }
+
+/* Positioning for back/next */
+.back-btn { left: 1rem; }
+.next-btn { right: 1rem; }
+
+/* Responsive height */
+@media (max-width: 768px) {
+  .slides {
+    height: 250px;
+  }
+}
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.activity-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-5px);
+}
+
+.activity-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.activity-card h3 {
+  font-size: 1.2rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.activity-card p {
+  padding: 0 1rem 1rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.section-title {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 2rem;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: #777;
+  margin-bottom: 2rem;
+}
+.carousel-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
