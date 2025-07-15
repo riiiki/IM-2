@@ -8,7 +8,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" type="image/png" href="images/mountain.png">
+  <link rel="icon" type="image/jpg" href="images/skyview.jpg">
   <title>Skyview Resort</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -49,62 +49,10 @@
           <a href="user_booking.php">Bookings</a>
           <a href="activities.php">Activities</a>
           <a href="about.php">About</a>
-          <a href="#" onclick="openModal('registerModal')">Register</a>
-          <a href="#" onclick="openModal('loginModal')">Login</a>
+          <a href="admin/register.php">Register</a>
+          <a href="admin/login.php">Login</a>
         </nav>
       </div>
-      <img src="images/sort.jpg" alt="Resort view" class="wrapper-bg" />
-      <div id="registerModal" class="modal">
-        <div class="modal-content">
-          <span class="close" onclick="closeModal('registerModal')">&times;</span>
-          <img src="images/logging.PNG" alt="">
-          <h2>Register</h2>
-          <form method="POST" action="user/register.php">
-            <label for="register-first-name">First Name:</label>
-            <input type="text" id="register-first-name" name="first_name" required><br><br>
-
-            <label for="register-last-name">Last Name:</label>
-            <input type="text" id="register-last-name" name="last_name" required><br><br>
-
-            <label for="register-email">Email:</label>
-            <input type="email" id="register-email" name="email" required><br><br>
-
-            <label for="register-phone">Phone Number:</label>
-            <input type="tel" id="register-phone" name="phone_number" pattern="[0-9+ ]{7,}" required><br><br>
-
-            <label for="register-password">Password:</label>
-            <input type="password" id="register-password" name="password" required><br><br>
-
-            <label for="register-date">Date Registered:</label>
-            <input type="date" id="register-date" name="date_registered" required><br><br>
-
-            <input type="submit" name="submit" value="Register">
-
-            <div class="social-login">
-              <button type="button" class="google-login">Sign up with Google</button>
-              <button type="button" class="facebook-login">Sign up with Facebook</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <div id="loginModal" class="modal">
-        <div class="modal-content">
-          <span class="close" onclick="closeModal('loginModal')">&times;</span>
-          <img src="images/logging.PNG" alt="">
-          <h2>Login</h2>
-          <form method="POST" action="user/login.php">
-            <label for="login-email">Email:</label>
-            <input type="email" id="login-email" name="login_email" required><br><br>
-
-            <label for="login-password">Password:</label>
-            <input type="password" id="login-password" name="login_password" required><br><br>
-
-            <input type="submit" name="login_submit" value="Login">
-          </form>
-        </div>
-      </div>
-
       <div class="hero">
         <h2 class="hero-text">CHASE<br>THE<br>SUNSETS</h2>
       </div>
