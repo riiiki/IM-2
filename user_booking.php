@@ -1,16 +1,7 @@
 <?php
 session_start();
+include("user/auth.php");
 require 'user/config.php';
-
-if (!isset($_SESSION['user_id'])) {
-    echo "<script>
-        alert('You must be logged in to view your bookings.');
-        window.location.href = 'index.php';
-    </script>";
-    exit();
-}
-
-$user_id = $_SESSION['user_id'];
 
 $stmt = $conn->prepare("SELECT checkin, checkout, room_details, created_at FROM bookings WHERE user_id = ? ORDER BY created_at DESC");
 $stmt->bind_param("i", $user_id);
@@ -31,7 +22,7 @@ $result = $stmt->get_result();
   <div class="wrapper">
     <header>
       <div class="nav">
-        <h1 class="logo"><a href="index.php"><span>SKYVIEW</span></a></h1>
+        <h1 class="logo"><a href="index2.php"><span>SKYVIEW</span></a></h1>
         <nav>
           <a href="rooms.php">Rooms</a>
           <a href="user_booking.php" class="active">Bookings</a>
