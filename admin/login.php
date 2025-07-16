@@ -18,9 +18,9 @@
       <input type="email" name="email" placeholder="Email" required />
       <input type="password" name="password" placeholder="Password" required />
       <button type="submit">Login</button>
-      <p style="margin-top: 1rem; font-size: 0.9rem;">
+      <p>
         Don't have an account? <a href="register.php">Register Now</a><br>
-        <a href="#">Forgot Password?</a>
+        <a href="forgot_password.php">Forgot Password?</a>
       </p>
     </form>
   </div>

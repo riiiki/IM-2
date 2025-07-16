@@ -3,7 +3,7 @@
     include("../user/config.php");
 
     if (!isset($_SESSION['id'])) {
-        header("Location: ../login.php");
+        header("Location: login.php");
         exit();
     }
 ?>
@@ -22,6 +22,7 @@
       <h1 class="logo"><a href="dash_admin.php">SKYVIEW</a></h1>
       <nav>
         <a href="dash_admin.php">Dashboard</a>
+        <a href="rooms_crud.php">Rooms</a>
         <a href="booking.php">Bookings</a>
         <a href="user.php">Users</a>
         <a href="logout.php">Logout</a>

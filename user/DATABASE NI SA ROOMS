@@ -8,3 +8,16 @@
 // mao ni sud sa db e tweak lang nya
 
 //butang ta login/logout sa admin side sad
+
+
+CREATE TABLE bookings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT,
+  checkin DATE NOT NULL,
+  checkout DATE NOT NULL,
+  room_details VARCHAR(255) NOT NULL,
+  booking_status ENUM('Pending', 'Confirmed', 'Cancelled') DEFAULT 'Pending',
+  payment_status ENUM('Unpaid', 'Paid', 'Rejected') DEFAULT 'Unpaid',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES customer(CustomerID)
+);

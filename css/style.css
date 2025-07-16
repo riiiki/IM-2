@@ -100,6 +100,12 @@ body {
   flex: 1;
 }
 
+.dashboard-section {
+  padding: 2rem;
+  background-color: #f8faff;
+  flex: 1;
+}
+
 .welcome {
   width: 300px;
   background-color: rgba(230, 238, 255, 0.9);
@@ -185,6 +191,30 @@ body {
 
 .booking button:hover {
   background-color: #002a55;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+thead {
+  background-color: #003366;
+  color: white;
+}
+
+tbody tr:hover {
+  background-color: #f0f8ff;
 }
 
 /* Payment landing page styles */

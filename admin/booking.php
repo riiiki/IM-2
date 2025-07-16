@@ -1,6 +1,17 @@
-<?php
-include '../user/config.php';
-include "header.php";
+<?php 
+  include "../user/config.php";
+  include "header.php";
+
+$result = $conn->query("
+  SELECT b.id, b.checkin, b.checkout, b.room_details, b.created_at, c.fullName 
+  FROM bookings b 
+  LEFT JOIN customer c ON b.user_id = c.CustomerID
+");
+
+if (!$result) {
+    echo "Query failed: " . $conn->error;
+    exit;
+}
 
 $result = $conn->query("SELECT * FROM bookings INNER JOIN customer ON bookings.user_id = Customer.CustomerID ORDER BY checkin DESC");
 ?>
@@ -22,7 +33,7 @@ $result = $conn->query("SELECT * FROM bookings INNER JOIN customer ON bookings.u
           while ($row = $result->fetch_assoc()): 
         ?>
           <tr>
-            <td><?= htmlspecialchars($row['fullName']) ?></td>
+            <td><?= htmlspecialchars($row['FullName']) ?></td>
             <td><?= $row['checkin'] ?></td>
             <td><?= $row['checkout'] ?></td>
             <td><?= $row['room_details'] ?></td>

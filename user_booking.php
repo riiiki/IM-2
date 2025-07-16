@@ -20,7 +20,7 @@ $result = $stmt->get_result();
 <head>
   <meta charset="UTF-8" />
   <title>Your Bookings | Skyview Resort</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/admin_style.css" />
   <link rel="icon" type="image/png" href="images/mountain.png">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -36,7 +36,7 @@ $result = $stmt->get_result();
           <a href="activities.php">Activities</a>
           <a href="about.php">About</a>
           <span>Welcome, <?php echo htmlspecialchars($loginUsername); ?>!</span>
-          <a href="logout.php">Logout</a>
+          <a href="admin/logout.php">Logout</a>
         </nav>
       </div>
     </header>
@@ -51,7 +51,7 @@ $result = $stmt->get_result();
         <h3 style="text-align:center;">My Bookings</h3>
         <?php if ($result->num_rows > 0): ?>
           <div class="booking-table-container">
-            <table class="styled-table">
+            <table border="1" cellpadding="10" class="styled-table">
               <thead>
                 <tr>
                   <th>Check-in</th>
