@@ -1,7 +1,7 @@
 <?php 
 include ("user/auth.php"); 
 ?>
-
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
