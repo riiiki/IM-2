@@ -1,7 +1,17 @@
-<?php 
-include ("user/auth.php"); 
+<?php
+include("user/auth.php");
+include("user/config.php");
+
+// Fetch rooms from DB with image paths
+$rooms = [];
+$result = $conn->query("SELECT id, name, availability, image_path FROM rooms");
+while ($row = $result->fetch_assoc()) {
+    $rooms[] = $row;
+}
+
+// Today's date for disabling past dates
+$today = date('Y-m-d');
 ?>
-  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +22,7 @@ include ("user/auth.php");
   <title>Rooms | Skyview Resort</title>
   <link rel="stylesheet" href="css/style.css" />
   <style>
+    /* Existing styling... */
     .rooms-content {
       display: flex;
       justify-content: center;
@@ -29,18 +40,6 @@ include ("user/auth.php");
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
       align-self: stretch;
-    }
-    .welcome-text-container h2 {
-      margin-top: 0;
-      color: #333;
-      font-size: 1.8rem;
-    }
-    .welcome-text-container h2 span {
-      color: #007bff;
-    }
-    .welcome-text-container p {
-      color: #555;
-      line-height: 1.6;
     }
     .room-listings {
       flex: 2;
@@ -64,6 +63,13 @@ include ("user/auth.php");
     }
     .room-card:hover {
       transform: scale(1.02);
+    }
+    .room-card.unavailable {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .room-card.unavailable:hover {
+      transform: none;
     }
     .room-card img {
       width: 100%;
@@ -117,17 +123,6 @@ include ("user/auth.php");
     .booking button:hover {
       background-color: #388E3C;
     }
-    #pax-minus, #pax-plus {
-      background-color: #e0e0e0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-    #pax-minus:hover, #pax-plus:hover {
-      background-color: #d5d5d5;
-    }
     main.main-container {
       padding-bottom: 4rem;
     }
@@ -151,168 +146,153 @@ include ("user/auth.php");
         max-width: 350px;
       }
     }
+    #availability-msg {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <header>
-      <div class="nav">
-        <h1 class="logo"><a href="index2.php">SKYVIEW</a></h1>
-        <nav>
-          <a href="rooms.php" class="active">Rooms</a>
-          <a href="user_booking.php">Bookings</a>
-          <a href="activities.php">Activities</a>
-          <a href="about.php">About</a>
-          <span>Welcome, <?php echo htmlspecialchars($loginUsername); ?>!</span>
-          <a href="admin/logout.php">Logout</a>
-        </nav>
-      </div>
-    </header>
+<div class="wrapper">
+  <header>
+    <div class="nav">
+      <h1 class="logo"><a href="index.php">SKYVIEW</a></h1>
+      <nav>
+        <a href="index.php">Home</a>
+        <a href="rooms.php">Rooms</a>
+        <a href="user.php">User</a>
+        <a href="admin/logout.php">Logout</a>
+      </nav>
+    </div>
+  </header>
 
-    <main class="main-container">
-      <div class="rooms-content">
-        <section class="welcome-text-container">
-          <h2>Our <span>Rooms</span></h2>
-          <p>At Skyview Resort, we pride ourselves on offering a diverse selection of accommodations designed to meet every guest's needs and preferences. From cozy nooks to luxurious suites, Skyview offers a variety of rooms to suit every guest. Each room provides a serene escape with beautiful views, promising an experience where relaxation meets elegance.</p>
-        </section>
+  <main class="main-container">
+    <div class="rooms-content">
+      <section class="welcome-text-container">
+        <h2 class="welcome-title">Explore Our Rooms</h2>
+        <p class="welcome-text">Choose from our available rooms and book your stay with Skyview Resort.</p>
+      </section>
 
-        <section class="room-listings">
-          <div class="room-card" data-room="Standard Room">
-            <img src="images/double.jpeg" alt="Standard Room">
+      <section class="room-listings">
+        <?php foreach ($rooms as $room): ?>
+          <div class="room-card <?= $room['availability'] <= 0 ? 'unavailable' : '' ?>"
+               data-id="<?= $room['id'] ?>" data-name="<?= htmlspecialchars($room['name']) ?>">
+            <img src="<?= htmlspecialchars($room['image_path']) ?>" alt="<?= htmlspecialchars($room['name']) ?>">
             <div class="room-details">
-              <h3>Standard Room</h3>
-              <p>Perfect for couples or solo travelers seeking comfort and simplicity.</p>
-              <p><strong>Capacity:</strong> 2 Pax</p>
-              <p><strong>Price:</strong> ₱1,500 / night</p>
-              <p><strong>Rating:</strong> 7.2</p>
+              <h3><?= htmlspecialchars($room['name']) ?></h3>
+              <p><strong>Availability:</strong> <?= $room['availability'] ?></p>
             </div>
           </div>
+        <?php endforeach; ?>
+      </section>
+    </div>
 
-          <div class="room-card" data-room="Deluxe Room">
-            <img src="images/family.jpeg" alt="Deluxe Room">
-            <div class="room-details">
-              <h3>Deluxe Room</h3>
-              <p>Ideal for families or groups with space and comfort.</p>
-              <p><strong>Capacity:</strong> 4 Pax</p>
-              <p><strong>Price:</strong> ₱3,000 / night</p>
-              <p><strong>Rating:</strong> 8.5</p>
-            </div>
-          </div>
-        </section>
-      </div>
+    <div class="booking">
+      <h3>CHECK AVAILABILITY</h3>
+      <form action="user/booking.php" method="POST">
+        <input
+          type="date"
+          name="checkin"
+          id="checkin"
+          required
+          min="<?= $today ?>"
+        />
+        <input
+          type="date"
+          name="checkout"
+          id="checkout"
+          required
+          min="<?= $today ?>"
+        />
+        <select name="room_id" id="room-select" required>
+          <option value="">Select a Room</option>
+          <?php foreach ($rooms as $room): ?>
+            <option
+              value="<?= $room['id'] ?>"
+              <?= $room['availability'] == 0 ? 'disabled' : '' ?>>
+              <?= htmlspecialchars($room['name']) ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
 
-      <div class="booking">
-        <h3>CHECK AVAILABILITY</h3>
-        <form action="user/booking.php" method="POST">
-          <input type="date" name="checkin" required />
-          <input type="date" name="checkout" required />
-
-          <select name="room" id="room-select" required>
-            <option value="">Select a Room</option>
-            <option value="Standard Room">Standard Room</option>
-            <option value="Deluxe Room">Deluxe Room</option>
-          </select>
-
-          <div style="display: flex; flex-direction: column; align-items: center; margin-top: 1rem;">
-            <label style="font-weight: bold;">Additional Pax</label>
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem;">
-              <button type="button" id="pax-minus" style="padding: 0.4rem 0.8rem;">−</button>
-              <input type="number" name="pax" id="pax" value="0" min="0" max="10" required style="text-align: center; width: 60px;" />
-              <button type="button" id="pax-plus" style="padding: 0.4rem 0.8rem;">+</button>
-            </div>
-          </div>
-
-          <div id="price-display" style="margin-top: 10px; font-weight: bold; color: #333;"></div>
-
-          <button type="submit" style="margin-top: 1rem;">Book Now</button>
-        </form>
-      </div>
-    </main>
-
-    <footer>
-      <p>© 2025 Skyview Resort. All rights reserved.</p>
-      <p>📞 +63 960 863 2989</p>
-      <div class="social-links">
-        <h4>Stay Connected</h4>
-        <div class="icon-buttons">
-          <a href="https://www.facebook.com/profile.php?id=100063647214137" target="_blank" class="icon facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://twitter.com" target="_blank" class="icon twitter"><i class="fab fa-twitter"></i></a>
-          <a href="https://ph.pinterest.com/pin/30328997485654246/" target="_blank" class="icon pinterest"><i class="fab fa-pinterest-p"></i></a>
-          <a href="https://www.instagram.com/islandskyview.resort/?hl=en" target="_blank" class="icon instagram"><i class="fab fa-instagram"></i></a>
-          <a href="http://youtube.com/@MrBeast" target="_blank" class="icon youtube"><i class="fab fa-youtube"></i></a>
+        <label style="font-weight:bold; margin-top:1rem">Additional Pax</label>
+        <div style="display:flex; align-items:center; gap:0.5rem">
+          <button type="button" id="pax-minus">−</button>
+          <input
+            type="number"
+            name="pax"
+            id="pax"
+            value="0"
+            min="0" max="10"
+            required
+            style="width:60px; text-align:center;"
+          />
+          <button type="button" id="pax-plus">+</button>
         </div>
-      </div>
-    </footer>
-  </div>
+        <div id="availability-msg"></div>
+        <button type="submit" style="margin-top:1rem;">Book Now</button>
+      </form>
+    </div>
+  </main>
 
-  <script>
-    const roomSelect = document.getElementById("room-select");
-    const paxInput = document.getElementById("pax");
-    const display = document.getElementById("price-display");
+  <footer>
+    <p>© 2025 Skyview Resort. All rights reserved.</p>
+  </footer>
+</div>
 
-    function getBasePrice(room) {
-      if (room === "Standard Room") return 1500;
-      if (room === "Deluxe Room") return 3000;
-      return 0;
+<script>
+  const rooms = <?= json_encode($rooms) ?>;
+  const today = new Date().toISOString().split('T')[0];
+  const checkin = document.getElementById('checkin');
+  const checkout = document.getElementById('checkout');
+  const roomSelect = document.getElementById("room-select");
+  const availabilityMsg = document.getElementById("availability-msg");
+  const paxInput = document.getElementById("pax");
+
+  // Ensure min attributes
+  checkin.min = today;
+  checkout.min = today;
+
+  // Make checkout date respect checkin
+  checkin.addEventListener('change', () => {
+    checkout.min = checkin.value || today;
+    if (checkout.value < checkout.min) {
+      checkout.value = checkout.min;
     }
+  });
 
-    function updatePrice() {
-      const room = roomSelect.value;
-      const pax = parseInt(paxInput.value);
-      const basePrice = getBasePrice(room);
-
-      if (!room) {
-        display.innerText = "";
-        return;
-      }
-
-      if (isNaN(pax) || pax < 0) {
-        display.innerText = `Base Price: ₱${basePrice.toLocaleString()} / night`;
-        return;
-      }
-
-      const extraCost = pax * 300;
-      const total = basePrice + extraCost;
-
-      if (pax === 0) {
-        display.innerText = `Total Price: ₱${total.toLocaleString()} / night (Base Only)`;
-      } else {
-        display.innerText = `Total Price: ₱${total.toLocaleString()} / night (₱300 x ${pax} additional pax)`;
-      }
+  // Update availability message when room changes
+  roomSelect.addEventListener("change", () => {
+    availabilityMsg.innerText = "";
+    const selectedId = parseInt(roomSelect.value);
+    const selectedRoom = rooms.find(r => r.id === selectedId);
+    if (selectedRoom && selectedRoom.availability <= 0) {
+      availabilityMsg.innerText = "This room is currently unavailable.";
     }
+  });
 
-    roomSelect.addEventListener("change", () => {
-      paxInput.value = "0";
-      updatePrice();
+  // Clicking on a room card selects it
+  document.querySelectorAll('.room-card').forEach(card => {
+    card.addEventListener('click', () => {
+      if (card.classList.contains('unavailable')) return;
+      roomSelect.value = card.dataset.id;
+      roomSelect.dispatchEvent(new Event('change'));
+      document.querySelector('.booking').scrollIntoView({ behavior: 'smooth' });
     });
+  });
 
-    paxInput.addEventListener("input", updatePrice);
-
-    document.getElementById("pax-minus").addEventListener("click", () => {
-      let current = parseInt(paxInput.value) || 0;
-      if (current > 0) {
-        paxInput.value = current - 1;
-        updatePrice();
-      }
-    });
-
-    document.getElementById("pax-plus").addEventListener("click", () => {
-      let current = parseInt(paxInput.value) || 0;
-      if (current < 10) {
-        paxInput.value = current + 1;
-        updatePrice();
-      }
-    });
-
-    document.querySelectorAll(".room-card").forEach(card => {
-      card.addEventListener("click", () => {
-        const room = card.getAttribute("data-room");
-        roomSelect.value = room;
-        paxInput.value = "0";
-        updatePrice();
-        document.querySelector(".booking").scrollIntoView({ behavior: "smooth" });
-      });
-    });
-  </script>
+  // Pax counter
+  document.getElementById("pax-minus").addEventListener("click", () => {
+    if (parseInt(paxInput.value) > 0) {
+      paxInput.value = parseInt(paxInput.value) - 1;
+    }
+  });
+  document.getElementById("pax-plus").addEventListener("click", () => {
+    if (parseInt(paxInput.value) < 10) {
+      paxInput.value = parseInt(paxInput.value) + 1;
+    }
+  });
+</script>
 </body>
 </html>
