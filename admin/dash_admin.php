@@ -13,7 +13,6 @@ if (!$result) {
     exit;
 }
 
-
   $bookingCount = $conn->query("SELECT COUNT(*) AS total FROM bookings")->fetch_assoc()['total'];
   $userCount = $conn->query("SELECT COUNT(*) AS total FROM customer")->fetch_assoc()['total'];
 ?>

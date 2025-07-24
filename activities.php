@@ -25,7 +25,7 @@ include("user/auth.php");
           <a href="activities.php" class="active">Activities</a>
           <a href="about.php">About</a>
           <span>Welcome, <?php echo htmlspecialchars($loginUsername); ?>!</span>
-          <a href="user/logout.php">Logout</a>
+          <a href="admin/logout.php">Logout</a>
         </nav>
       </div>
     </header>

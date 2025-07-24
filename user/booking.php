@@ -2,7 +2,7 @@
 session_start();
 require 'config.php';
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['id'])) {
   die("You must <a href='../index.php'>login</a> to book.");
 }
 
@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $checkin = $_POST['checkin'];
   $checkout = $_POST['checkout'];
   $room = $_POST['room'];
-  $user_id = $_SESSION['user_id'];
+  $user_id = $_SESSION['id'];
 
   $stmt = $conn->prepare("INSERT INTO bookings (user_id, checkin, checkout, room_details) VALUES (?, ?, ?, ?)");
   $stmt->bind_param("isss", $user_id, $checkin, $checkout, $room);
