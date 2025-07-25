@@ -2,7 +2,7 @@
 include("user/auth.php");
 include("user/config.php");
 
-// Fetch rooms from DB with image paths
+// Fetch rooms from DB
 $rooms = [];
 $result = $conn->query("SELECT id, name, availability, image_path FROM rooms");
 while ($row = $result->fetch_assoc()) {
@@ -22,7 +22,7 @@ $today = date('Y-m-d');
   <title>Rooms | Skyview Resort</title>
   <link rel="stylesheet" href="css/style.css" />
   <style>
-    /* Existing styling... */
+    /* Inline styling moved here from your previous code */
     .rooms-content {
       display: flex;
       justify-content: center;
@@ -160,11 +160,11 @@ $today = date('Y-m-d');
       <h1 class="logo"><a href="index.php">SKYVIEW</a></h1>
       <nav>
         <a href="rooms.php">Rooms</a>
-          <a href="user_booking.php">Bookings</a>
-          <a href="activities.php">Activities</a>
-          <a href="about.php">About</a>
-          <span>Welcome, <?php echo htmlspecialchars($loginUsername); ?>!</span>
-          <a href="admin/logout.php">Logout</a>
+        <a href="user_booking.php">Bookings</a>
+        <a href="activities.php">Activities</a>
+        <a href="about.php">About</a>
+        <span>Welcome, <?php echo htmlspecialchars($loginUsername); ?>!</span>
+        <a href="admin/logout.php">Logout</a>
       </nav>
     </div>
   </header>
@@ -193,26 +193,14 @@ $today = date('Y-m-d');
     <div class="booking">
       <h3>CHECK AVAILABILITY</h3>
       <form action="user/booking.php" method="POST">
-        <input
-          type="date"
-          name="checkin"
-          id="checkin"
-          required
-          min="<?= $today ?>"
-        />
-        <input
-          type="date"
-          name="checkout"
-          id="checkout"
-          required
-          min="<?= $today ?>"
-        />
+        <input type="date" name="checkin" id="checkin" required min="<?= $today ?>" />
+        <input type="date" name="checkout" id="checkout" required min="<?= $today ?>" />
+        
+        <!-- Select using room_id -->
         <select name="room_id" id="room-select" required>
           <option value="">Select a Room</option>
           <?php foreach ($rooms as $room): ?>
-            <option
-              value="<?= $room['id'] ?>"
-              <?= $room['availability'] == 0 ? 'disabled' : '' ?>>
+            <option value="<?= $room['id'] ?>" <?= $room['availability'] == 0 ? 'disabled' : '' ?>>
               <?= htmlspecialchars($room['name']) ?>
             </option>
           <?php endforeach; ?>
@@ -221,15 +209,7 @@ $today = date('Y-m-d');
         <label style="font-weight:bold; margin-top:1rem">Additional Pax</label>
         <div style="display:flex; align-items:center; gap:0.5rem">
           <button type="button" id="pax-minus">−</button>
-          <input
-            type="number"
-            name="pax"
-            id="pax"
-            value="0"
-            min="0" max="10"
-            required
-            style="width:60px; text-align:center;"
-          />
+          <input type="number" name="pax" id="pax" value="0" min="0" max="10" required style="width:60px; text-align:center;" />
           <button type="button" id="pax-plus">+</button>
         </div>
         <div id="availability-msg"></div>
@@ -239,19 +219,19 @@ $today = date('Y-m-d');
   </main>
 
   <footer>
-      <p>© 2025 Skyview Resort. All rights reserved.</p>
-      <p>📞 +63 960 863 2989</p>
-      <div class="social-links">
-        <h4>Stay Connected</h4>
-        <div class="icon-buttons">
-          <a href="https://www.facebook.com/profile.php?id=100063647214137" target="_blank" class="icon facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://twitter.com" target="_blank" class="icon twitter"><i class="fab fa-twitter"></i></a>
-          <a href="https://ph.pinterest.com/pin/30328997485654246/" target="_blank" class="icon pinterest"><i class="fab fa-pinterest-p"></i></a>
-          <a href="https://www.instagram.com/islandskyview.resort/?hl=en" target="_blank" class="icon instagram"><i class="fab fa-instagram"></i></a>
-          <a href="http://youtube.com/@MrBeast" target="_blank" class="icon youtube"><i class="fab fa-youtube"></i></a>
-        </div>
+    <p>© 2025 Skyview Resort. All rights reserved.</p>
+    <p>📞 +63 960 863 2989</p>
+    <div class="social-links">
+      <h4>Stay Connected</h4>
+      <div class="icon-buttons">
+        <a href="https://www.facebook.com/profile.php?id=100063647214137" target="_blank" class="icon facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com" target="_blank" class="icon twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://ph.pinterest.com/pin/30328997485654246/" target="_blank" class="icon pinterest"><i class="fab fa-pinterest-p"></i></a>
+        <a href="https://www.instagram.com/islandskyview.resort/?hl=en" target="_blank" class="icon instagram"><i class="fab fa-instagram"></i></a>
+        <a href="http://youtube.com/@MrBeast" target="_blank" class="icon youtube"><i class="fab fa-youtube"></i></a>
       </div>
-    </footer>
+    </div>
+  </footer>
 </div>
 
 <script>
@@ -263,11 +243,9 @@ $today = date('Y-m-d');
   const availabilityMsg = document.getElementById("availability-msg");
   const paxInput = document.getElementById("pax");
 
-  // Ensure min attributes
   checkin.min = today;
   checkout.min = today;
 
-  // Make checkout date respect checkin
   checkin.addEventListener('change', () => {
     checkout.min = checkin.value || today;
     if (checkout.value < checkout.min) {
@@ -275,7 +253,6 @@ $today = date('Y-m-d');
     }
   });
 
-  // Update availability message when room changes
   roomSelect.addEventListener("change", () => {
     availabilityMsg.innerText = "";
     const selectedId = parseInt(roomSelect.value);
@@ -285,7 +262,6 @@ $today = date('Y-m-d');
     }
   });
 
-  // Clicking on a room card selects it
   document.querySelectorAll('.room-card').forEach(card => {
     card.addEventListener('click', () => {
       if (card.classList.contains('unavailable')) return;
@@ -295,7 +271,6 @@ $today = date('Y-m-d');
     });
   });
 
-  // Pax counter
   document.getElementById("pax-minus").addEventListener("click", () => {
     if (parseInt(paxInput.value) > 0) {
       paxInput.value = parseInt(paxInput.value) - 1;
